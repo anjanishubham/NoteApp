@@ -15,7 +15,7 @@ interface ToDoDao  {
      */
 
     @Query("SELECT * FROM task")
-    fun observeAll(): Flow<List<MyTask>>
+    fun observeAll(): Flow<List<TodoLocal>>
 
     /**
      * Observes a single task.
@@ -24,7 +24,7 @@ interface ToDoDao  {
      * @return the task with taskId.
      */
     @Query("SELECT * FROM task WHERE id = :taskId")
-    fun observeById(taskId: String): Flow<MyTask>
+    fun observeById(taskId: String): Flow<TodoLocal>
 
     /**
      * Select all tasks from the tasks table.
@@ -32,7 +32,7 @@ interface ToDoDao  {
      * @return all tasks.
      */
     @Query("SELECT * FROM task")
-    suspend fun getAll(): List<MyTask>
+    suspend fun getAll(): List<TodoLocal>
 
     /**
      * Select a task by id.
@@ -41,7 +41,7 @@ interface ToDoDao  {
      * @return the task with taskId.
      */
     @Query("SELECT * FROM task WHERE id = :taskId")
-    suspend fun getById(taskId: String): MyTask?
+    suspend fun getById(taskId: String): TodoLocal?
 
     /**
      * Insert or update a task in the database. If a task already exists, replace it.
@@ -49,7 +49,7 @@ interface ToDoDao  {
      * @param task the task to be inserted or updated.
      */
     @Upsert
-    suspend fun upsert(task: MyTask)
+    suspend fun upsert(task: TodoLocal)
 
     /**
      * Insert or update tasks in the database. If a task already exists, replace it.
@@ -57,7 +57,7 @@ interface ToDoDao  {
      * @param tasks the tasks to be inserted or updated.
      */
     @Upsert
-    suspend fun upsertAll(tasks: List<MyTask>)
+    suspend fun upsertAll(tasks: List<TodoLocal>)
 
     /**
      * Update the complete status of a task

@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "task")
-data class MyTask(
+data class TodoLocal(
     @PrimaryKey
     val id: String,
     val title: String,

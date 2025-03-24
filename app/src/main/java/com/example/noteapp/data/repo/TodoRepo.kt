@@ -8,6 +8,6 @@ interface TodoRepo {
     suspend fun createTodo(task: Todo)
     suspend fun updateTodo(task: TodoLocal)
     suspend fun refresh()
-    suspend fun getTodos(): Flow<List<TodoLocal>>
+    suspend fun observeTodos(): Flow<List<TodoLocal>>
     suspend fun deleteTodo(id: String)
 }

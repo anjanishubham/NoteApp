@@ -33,7 +33,7 @@ class TodoRepoImp @Inject constructor(
 
     }
 
-    override suspend fun getTodos(): Flow<List<TodoLocal>> {
+    override suspend fun observeTodos(): Flow<List<TodoLocal>> {
         return localDataSource.observeAll()
     }
 

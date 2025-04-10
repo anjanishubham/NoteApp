@@ -1,5 +1,7 @@
 package com.example.noteapp.ui.screen
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
@@ -11,6 +13,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.noteapp.ui.viewmodel.TodoListScreenViewModel
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ToDoScreen(modifier: Modifier = Modifier) {
     val viewModel = hiltViewModel<TodoListScreenViewModel>()
@@ -18,6 +21,6 @@ fun ToDoScreen(modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "To-Do Screen", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+
     }
 }

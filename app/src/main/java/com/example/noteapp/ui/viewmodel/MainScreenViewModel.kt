@@ -28,6 +28,10 @@ class MainScreenViewModel @Inject constructor(
         Log.d("MainScreenViewModel", "evenClick: $event")
     }
 
+    fun addNote(title: String, desc: String) {
+
+    }
+
     companion object{
         fun getTodo() = Todo(
             id = "",

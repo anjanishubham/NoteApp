@@ -42,7 +42,9 @@ fun MainScreen(modifier: Modifier = Modifier) {
     val viewModel = hiltViewModel<MainScreenViewModel>()
     val state = viewModel.toolbarState.collectAsState()
     val scope = rememberCoroutineScope()
-    val sheetState = rememberModalBottomSheetState()
+    val sheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = true
+    )
     var showBottomSheet by remember { mutableStateOf(false) }
 
     Scaffold(

@@ -29,8 +29,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import java.util.Calendar
 
 @Composable
@@ -71,6 +76,10 @@ fun BottomSheetContent(onSave: (String, String) -> Unit) {
             .padding(16.dp)
             .fillMaxWidth()
     ) {
+        Text("Add Note",Modifier.align(Alignment.CenterHorizontally), style = TextStyle(Color.Black,
+            fontStyle = FontStyle.Normal, fontWeight = FontWeight.Bold, fontSize = 22.sp
+        ))
+        Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
             value = title,
             onValueChange = { title = it },
@@ -85,12 +94,6 @@ fun BottomSheetContent(onSave: (String, String) -> Unit) {
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Button(
-            onClick = { onSave(title, description) },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Save Note")
-        }
 
         Row(
             horizontalArrangement = Arrangement.SpaceAround,
@@ -125,6 +128,13 @@ fun BottomSheetContent(onSave: (String, String) -> Unit) {
             }
         }
 
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = { onSave(title, description) },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Save Note")
+        }
     }
 }
 

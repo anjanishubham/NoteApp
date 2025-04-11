@@ -1,9 +1,9 @@
 package com.example.noteapp.ui.viewmodel
 
 import android.util.Log
-import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.noteapp.data.local.TodoLocal
 import com.example.noteapp.domain.SavaTodoDatabaseUseCase
 import com.example.noteapp.domain.data.Todo
 import com.example.noteapp.ui.state.NoteAppToolbarState
@@ -28,8 +28,18 @@ class MainScreenViewModel @Inject constructor(
         Log.d("MainScreenViewModel", "evenClick: $event")
     }
 
-    fun addNote(title: String, desc: String) {
-
+    fun addNote(title: String, desc: String, createdDate: String, compeletedDate: String) {
+        val todo = Todo(
+            id = "",
+            title = title,
+            description = desc,
+            isCompleted = false,
+            dateOfCreation = System.currentTimeMillis(),
+            dateOfCompletion = 0L
+        )
+        viewModelScope.launch {
+            saveTodoUseCase.createTodo(todo)
+        }
     }
 
     companion object{

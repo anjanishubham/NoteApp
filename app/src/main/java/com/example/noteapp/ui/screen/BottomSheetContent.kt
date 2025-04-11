@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Done
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -39,7 +38,7 @@ import androidx.compose.ui.unit.sp
 import java.util.Calendar
 
 @Composable
-fun BottomSheetContent(onSave: (String, String) -> Unit) {
+fun BottomSheetContent(onSave: (String, String, String, String) -> Unit) {
     val context = LocalContext.current
     val calendar = Calendar.getInstance()
     val year = calendar.get(Calendar.YEAR)
@@ -48,15 +47,15 @@ fun BottomSheetContent(onSave: (String, String) -> Unit) {
     val hour = calendar.get(Calendar.HOUR_OF_DAY)
     val minute = calendar.get(Calendar.MINUTE)
 
-    var selectedDateText by remember { mutableStateOf("Created Date") }
-    var selectedTimeText by remember { mutableStateOf("Completed Date") }
+    var createdDate by remember { mutableStateOf("Created Date") }
+    var completedDate by remember { mutableStateOf("Completed Date") }
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
 
     val datePickerDialog = DatePickerDialog(
         context,
         { _: DatePicker, selectedYear, selectedMonth, selectedDayOfMonth ->
-            selectedDateText = "$selectedDayOfMonth, ${getMonthName(selectedMonth)}, $selectedYear"
+            createdDate = "$selectedDayOfMonth, ${getMonthName(selectedMonth)}, $selectedYear"
         },
         year,
         month,
@@ -65,7 +64,7 @@ fun BottomSheetContent(onSave: (String, String) -> Unit) {
     val timePickerDialog = TimePickerDialog(
         context,
         { _: TimePicker, selectedHour, selectedMinute ->
-            selectedTimeText = String.format("%02d:%02d", selectedHour, selectedMinute)
+            completedDate = String.format("%02d:%02d", selectedHour, selectedMinute)
         },
         hour,
         minute,
@@ -111,7 +110,7 @@ fun BottomSheetContent(onSave: (String, String) -> Unit) {
             ) {
                 Icon(Icons.Filled.DateRange, contentDescription = "Calendar Icon")
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(selectedDateText)
+                Text(createdDate)
             }
 
             // Time Picker Button
@@ -124,13 +123,13 @@ fun BottomSheetContent(onSave: (String, String) -> Unit) {
             ) {
                 Icon(Icons.Filled.DateRange, contentDescription = "Time Icon")
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(selectedTimeText)
+                Text(completedDate)
             }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            onClick = { onSave(title, description) },
+            onClick = { onSave(title, description,createdDate,completedDate) },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Save Note")
